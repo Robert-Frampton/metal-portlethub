@@ -215,7 +215,6 @@ class PortletInit {
 				stateListenersQueue.indexOf(listener) === -1
 			);
 		}).forEach(key => {
-			// console.log(`Updated stateListenersQueue with ${key} for portlet ${portletId}`);
 			stateListenersQueue.push(stateChangeListeners[key]);
 		});
 
@@ -227,16 +226,14 @@ class PortletInit {
 		}
 
 		while (stateListenersQueue.length > 0) {
-			// async.nextTick(() => {
-				const listener = stateListenersQueue.shift();
-				const callback = listener.callback;
+			const listener = stateListenersQueue.shift();
+			const callback = listener.callback;
 
-				if (data && data.content) {
-					callback('portlet.onStateChange', state, data);
-				} else {
-					callback('portlet.onStateChange', state);
-				}
-			// });
+			if (data && data.content) {
+				callback('portlet.onStateChange', state, data);
+			} else {
+				callback('portlet.onStateChange', state);
+			}
 		}
 	}
 

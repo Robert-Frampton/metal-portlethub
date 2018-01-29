@@ -83,9 +83,7 @@ describe('The portlet hub allows the portlet client to execute a portlet action'
     beforeEach(function() {
       stateChangeHandle = hubA.addEventListener(
         'portlet.onStateChange',
-        data => {
-          // console.log(data);
-        }
+        data => {}
       );
     });
 
@@ -270,9 +268,7 @@ describe('The portlet hub allows the portlet client to execute a portlet action'
         return new Portlet(new PeerUpdaterActionPortlet())
           .register('updater')
           .then(hub => {
-            hub.addEventListener('portlet.onStateChange', data =>
-              console.log('updater changed')
-            );
+            hub.addEventListener('portlet.onStateChange', data => {});
             let el = document.createElement('form');
             let parms = {rp1: ['resVal']};
             return hub.action(el, parms).then(() => {

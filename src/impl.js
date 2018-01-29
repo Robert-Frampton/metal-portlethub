@@ -9,18 +9,10 @@ class PortletImpl {
 		throw new TypeError('Method createUrl not implemented');
 	}
 
-	createResourceUrl (parameters, cache, pid, resid) {
-
-		let cacheability = null;
-
-		if (!cache) {
-			cacheability = 'cacheLevelPage';
-		}
-
-		cacheability = cache;
+	createResourceUrl(parameters, cache, pid, resid) {
+		let cacheability = cache;
 
 		return this.getUrl("RESOURCE", pid, parameters, cacheability, resid);
-
 	}
 
 	executeAction() {
