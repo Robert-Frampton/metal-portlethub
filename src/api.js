@@ -151,6 +151,25 @@ class PortletInit {
 			});
 	}
 
+	get constants() {
+		return {
+			// Portlet mode
+			VIEW: 'view',
+			EDIT: 'edit',
+			HELP: 'help',
+
+			// window state
+			NORMAL: 'normal',
+			MINIMIZED: 'minimized',
+			MAXIMIZED: 'maximized',
+
+			// Resource URL cacheability
+			FULL: 'cacheLevelFull',
+			PAGE: 'cacheLevelPage',
+			PORTLET: 'cacheLevelPortlet'
+		}
+	}
+
 	createResourceUrl (parameters, cache, pid, resid){
 		//currently passing portletId as @param in createResourceUrl
 		//TODO - Review portletId arch
@@ -239,7 +258,20 @@ class PortletInit {
 
 	isInProgress() {}
 
-	newParameters(parameters) {}
+	newParameters(parameters) {
+		let name;
+		let newParams = {};
+
+		if (parameters) {
+			for (name in parameters) {
+				if (parameters.hasOwnProperty(name) && Array.isArray(parameters[name])) {
+					newParams[name] = parameters[name].slice(0);
+				}
+			}
+		}
+
+		return newParams;
+	}
 
 	newState(state) {
 		return new RenderState(state);
